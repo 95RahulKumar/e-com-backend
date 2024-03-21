@@ -12,7 +12,7 @@ exports.creatProduct = [
     const baseUrl = 'http://localhost:3000';
     const fileUrl = baseUrl + '/' + req.file.path.replace(/\\/g, '/');
     let product =  new Product(req.body);
-    console.log('name',req.file.filename,'url',fileUrl,')))');
+console.log('name',req.file.filename,'url',fileUrl,')))');
     product.image = [{
         public_id: req.file.filename,
         url: fileUrl
@@ -29,16 +29,19 @@ exports.creatProduct = [
 exports.getAllProducts= catchAsyncErrors(async (req,res)=>{
     const resultPerPage = req.query.per_page;
     let products = []
+    let productCount = 0;
     //total documets
-    const productCount = await Product.countDocuments();
+    // const productCount = await Product.countDocuments();
     if(Object.keys(req.query).length !== 0){
    const apifeature = new Features(Product.find(),req.query)
    .search()
    .filter()
    .pagination(resultPerPage);
    products = await apifeature.query;
+   productCount = products.length;
     }else{
         products = await Product.find();
+        productCount = products.length
     }
   if(!products){
     return next(new ErrorHandeler('product not found',404))
@@ -47,14 +50,13 @@ res.status(200).json({
     success:true,
     products,
     productCount
-   
+
 })
 })
 //single products
 exports.getProduct= catchAsyncErrors(async (req,res)=>{
     const id = req.params.id
     const product = await Product.find({_id:id});
-    console.log(product)
     if(!product){
         return next(new ErrorHandeler('product not found',404))
     }
@@ -69,7 +71,6 @@ exports.modifyProduct= [
     catchAsyncErrors(async (req,res,next)=>{
         const id = req.params.id;
         const product = await Product.findByIdAndUpdate({_id:id},req.body,{new:true})
-        console.log('updated product..',id)
         if(!product){
             return next(new ErrorHandeler('product not found',404))
         }
