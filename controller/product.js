@@ -29,20 +29,15 @@ console.log('name',req.file.filename,'url',fileUrl,')))');
 exports.getAllProducts= catchAsyncErrors(async (req,res)=>{
     const resultPerPage = req.query.per_page;
     let products = []
-    let productCount = 0;
-    //total documets
-    // const productCount = await Product.countDocuments();
-    if(Object.keys(req.query).length !== 0){
-   const apifeature = new Features(Product.find(),req.query)
+   const apifeature = await new Features(Product.find(),req.query)
    .search()
    .filter()
    .pagination(resultPerPage);
+   
+   const productCount = await new Features(Product.find(),req.query)
+   .search()
+   .filter().query.count()
    products = await apifeature.query;
-   productCount = products.length;
-    }else{
-        products = await Product.find();
-        productCount = products.length
-    }
   if(!products){
     return next(new ErrorHandeler('product not found',404))
   }
@@ -50,7 +45,6 @@ res.status(200).json({
     success:true,
     products,
     productCount
-
 })
 })
 //single products
