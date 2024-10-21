@@ -21,7 +21,7 @@ async function main() {
 //enabeling cors
 
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:4200", credentials: true }));
+app.use(cors({ origin: "*", credentials: true }));
 //using cookieparser to pase the cookie in req.cookie
 app.use(cookieParser());
 ///

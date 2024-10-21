@@ -11,7 +11,7 @@ const productController = require('../controller/product');
  .post('/products/new',Authentication,autherizedRole('admin'),productController.creatProduct)
  .put('/products/:id',Authentication,autherizedRole('admin'),productController.modifyProduct)
  .delete('/products/:id',Authentication,autherizedRole('admin'),productController.deleteProdut)
- .put('/review',Authentication,productController.createProductReview)
- .get('/reviews',productController.getProductReview)
+ .put('/review',Authentication,Authentication,Authentication,productController.createProductReview)
+ .get('/reviews/:id',productController.getProductReview)
  .delete('/reviews',Authentication,productController.deleteProductReview)
 module.exports = router;
