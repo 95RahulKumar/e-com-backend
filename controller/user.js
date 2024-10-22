@@ -15,7 +15,7 @@ const { Parser } = require('json2csv');
 exports.registerUser = [
   fileUpload.single('avatar'), 
   catchAsyncErrors(async(req,res,next)=>{
-    const {name,email,password,gender} = req.body;
+    const {name,email,password,gender,address,city,state,country,pincode,phoneNumber} = req.body;
     const existingUser = await User.find({email:email});
     console.log('existing user...',existingUser)
     if(existingUser.length>0){
@@ -31,6 +31,14 @@ exports.registerUser = [
         ,email
         ,password,
         gender,
+        addressInfo:{
+          address,
+          city,
+          state,
+          country,
+          pincode,
+          phoneNumber
+        },
         avatar:{
             public_id:req.file?.filename,
             url:fileUrl

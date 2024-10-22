@@ -31,7 +31,7 @@ password:{
 },
 gender:{
     type:String,
-    required:[true,'Please enter the password'],
+    required:[true,'Please enter the gender'],
     enum: ['male', 'female', 'other']
 },
 createdAt: {
@@ -52,6 +52,14 @@ createdAt: {
     role:{
         type: String,
         default:'user'
+    },
+    addressInfo:{
+        address:{type:String, required:true},
+        city:{type:String, required:true},
+        state:{type:String, required:true},
+        country:{type:String, required:true},
+         pincode:{type:Number, required:true},
+         phoneNumber:{type:Number, required:true},
     },
     resetPasswordToken:String,
     resetPasswordExpire:Date
