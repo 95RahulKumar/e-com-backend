@@ -6,8 +6,8 @@ var _ = require('lodash');
 
 //create new order
 exports.newOrder = catchAsyncErrors(async(req,res,next)=>{
-    const{shipingInfo,orderItems,paymentInfo,itemsPrice,taxPrice,shipingPrice,totalPrice} = req.body;
-    const order = new Order({shipingInfo,orderItems,paymentInfo,itemsPrice,taxPrice,shipingPrice,totalPrice 
+    const{shipingInfo,orderItems,paymentInfo,taxPrice,shipingPrice,totalPrice} = req.body;
+    const order = new Order({shipingInfo,orderItems,paymentInfo,taxPrice,shipingPrice,totalPrice 
     ,paidAt:Date.now(),
     user:req.user._id });
     await order.save();
