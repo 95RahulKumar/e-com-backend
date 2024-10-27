@@ -7,7 +7,7 @@ const productController = require('../controller/product');
  router.get('/products',productController.getAllProducts)
  .get('/products/:id',productController.getProduct)
  .get('/categories',productController.getcategories)
- .get('/product/analitics',Authentication,autherizedRole('admin'),productController.productAnalitics)
+ .get('/product/analitics',Authentication,productController.productAnalitics)
  .post('/products/new',Authentication,autherizedRole('admin'),productController.creatProduct)
  .put('/products/:id',Authentication,autherizedRole('admin'),productController.modifyProduct)
  .delete('/products/:id',Authentication,autherizedRole('admin'),productController.deleteProdut)

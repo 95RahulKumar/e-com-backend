@@ -15,7 +15,7 @@ router.get('/user/:id',Authentication,autherizedRole('admin'), usercontroller.ge
 router.get('/users/download',Authentication,autherizedRole('admin'),usercontroller.download);
 router.put('/user/:id',Authentication,autherizedRole('admin'), usercontroller.updateUserRole);
 router.delete('/user/:id',Authentication,autherizedRole('admin'), usercontroller.deleteUser);
-router.get('/users',Authentication,autherizedRole('admin'),usercontroller.getUsers);
+router.get('/users',Authentication,usercontroller.getUsers);
 router.get('/logout', usercontroller.logoutUser);
 module.exports = router;
 
