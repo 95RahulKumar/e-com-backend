@@ -42,7 +42,7 @@ app.use("/api/", chatMsgRoutes);
 app.use(ErrorMiddlewere);
 try {
   //app.listen(3000,()=>{  //change in case of socket implemetation
-  server.listen(3000, () => {
+  app.listen(3000,()=>{ // server.listen(3000, () => { change in case if u dont want socket implimentation
     console.log(`server is running on ${process.env.PORT}`);
   });
 } catch (error) {
