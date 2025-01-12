@@ -49,7 +49,7 @@ res.status(200).json({
 })
 //single products
 exports.getProduct= catchAsyncErrors(async (req,res)=>{
-    const id = req.params.id
+    const id = req.query.id
     const product = await Product.find({_id:id});
     if(!product){
         return next(new ErrorHandeler('product not found',404))
@@ -63,7 +63,7 @@ exports.getProduct= catchAsyncErrors(async (req,res)=>{
 exports.modifyProduct= [
     fileUpload.single('image'),
     catchAsyncErrors(async (req,res,next)=>{
-        const id = req.params.id;
+        const id = req.query.id;
         const product = await Product.findByIdAndUpdate({_id:id},req.body,{new:true})
         if(!product){
             return next(new ErrorHandeler('product not found',404))
@@ -84,7 +84,7 @@ exports.modifyProduct= [
 
 //delete product
 exports.deleteProdut = catchAsyncErrors(async (req,res)=>{
-    const id = req.params.id;
+    const id = req.query.id;
    
      const product = await Product.findOneAndDelete({_id:id});
      if(!product){
@@ -161,7 +161,7 @@ exports.createProductReview = catchAsyncErrors(async (req,res,next)=>{
 
 //get all reviews for the a product
 exports.getProductReview = catchAsyncErrors(async (req,res,next)=>{
-    const id = req.params.id
+    const id = req.query.id
     const product = await Product.findById(id);
     if(!product){
         return next(new ErrorHandeler('no product found',404))

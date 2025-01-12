@@ -15,10 +15,12 @@ const app = express();
 const server = http.createServer(app);
 app.use('/uploads', express.static('uploads'));
 const io = socketIO(server,{
+  pingTimeout: 60000,
     cors: {
       origin: '*'
     }
   });
+const chatnamespace = io.of("/")
 io.on('connection', (socket) => {
     console.log('user connected');
     socket.on('disconnect', function () {
